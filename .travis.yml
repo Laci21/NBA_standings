@@ -10,6 +10,7 @@ android:
   -  tools
   -  extra-google-google_play_services
   -  extra-google-m2repository
+
   -  extra-android-m2repository
   -  addon-google_apis-google-19  -  sys-img-armeabi-v7a-android-21
 deploy:
@@ -25,3 +26,4 @@ notifications:
     -  laszlonagy93@gmail.com
     on_success:  always  
     on_failure:  always
+script: ./gradlew :app:build :app:connectedDebugAndroidTest
