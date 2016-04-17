@@ -13,13 +13,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import main.nba_standings.NbaStandingsDemoApplication;
 import main.nba_standings.R;
 import main.nba_standings.model.TeamStanding;
 
 public class StandingsFragment extends Fragment implements StandingsScreen {
     private View rootView = null;
 
+    @Inject
+    StandingsPresenter standingsPresenter;
+
     public StandingsFragment() {
+        NbaStandingsDemoApplication.injector.inject(this);
     }
 
     @Override
@@ -27,7 +32,7 @@ public class StandingsFragment extends Fragment implements StandingsScreen {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_standings, container, false);
 
-        StandingsPresenter.getInstance().showStandings();
+        standingsPresenter.showStandings();
 
         return rootView;
     }
@@ -36,12 +41,12 @@ public class StandingsFragment extends Fragment implements StandingsScreen {
     public void onAttach(final Context context) {
         super.onAttach(context);
 
-        StandingsPresenter.getInstance().attachScreen(this);
+        standingsPresenter.attachScreen(this);
     }
 
     @Override
     public void onDetach() {
-        StandingsPresenter.getInstance().detachScreen();
+        standingsPresenter.detachScreen();
         super.onDetach();
     }
 

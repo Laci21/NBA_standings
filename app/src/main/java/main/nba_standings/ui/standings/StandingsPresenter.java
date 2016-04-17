@@ -8,9 +8,6 @@ import main.nba_standings.ui.Presenter;
 public class StandingsPresenter extends Presenter<StandingsScreen> {
     private static StandingsPresenter instance = null;
 
-    private StandingsPresenter() {
-    }
-
     public static StandingsPresenter getInstance() {
         if (instance == null) {
             instance = new StandingsPresenter();
