@@ -1,5 +1,8 @@
 package main.nba_standings.ui.standings;
 
+import java.util.ArrayList;
+
+import main.nba_standings.model.TeamStanding;
 import main.nba_standings.ui.Presenter;
 
 public class StandingsPresenter extends Presenter<StandingsScreen> {
@@ -27,7 +30,15 @@ public class StandingsPresenter extends Presenter<StandingsScreen> {
 
     public void showStandings(){
         //TODO: find out standindgs from DB
-        String[][] standings = null;
-        screen.showStandings(standings);
+
+        ArrayList<TeamStanding> teamStandingList = new ArrayList<TeamStanding>();
+
+        TeamStanding goldenState = new TeamStanding(1, "Golden State", 73, 9);
+        TeamStanding sanAntonio = new TeamStanding(2, "San Antonio", 69, 13);
+
+        teamStandingList.add(goldenState);
+        teamStandingList.add(sanAntonio);
+
+        screen.showStandings(teamStandingList);
     }
 }

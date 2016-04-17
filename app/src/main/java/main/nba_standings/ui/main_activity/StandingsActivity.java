@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import main.nba_standings.R;
 import main.nba_standings.ui.favourite.FavouriteFragment;
+import main.nba_standings.ui.favourite_details.FavouriteDetailsFragment;
 import main.nba_standings.ui.standings.StandingsFragment;
 
 public class StandingsActivity extends AppCompatActivity {
@@ -28,6 +30,10 @@ public class StandingsActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    public ViewPager getmViewPager() {
+        return mViewPager;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +55,7 @@ public class StandingsActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -57,17 +63,19 @@ public class StandingsActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if(position == 0){
+            if (position == 0) {
                 return new StandingsFragment();
-            } else {
+            } else if (position == 1) {
                 return new FavouriteFragment();
+            } else {
+                return new FavouriteDetailsFragment();
             }
         }
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
-            return 2;
+            // Show 3 total pages.
+            return 3;
         }
 
         @Override
@@ -77,6 +85,8 @@ public class StandingsActivity extends AppCompatActivity {
                     return "SECTION 1";
                 case 1:
                     return "SECTION 2";
+                case 2:
+                    return "SECTION 3";
             }
             return null;
         }

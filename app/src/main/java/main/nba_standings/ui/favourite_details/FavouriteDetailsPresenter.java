@@ -1,5 +1,6 @@
 package main.nba_standings.ui.favourite_details;
 
+import main.nba_standings.model.FavouriteTeamData;
 import main.nba_standings.ui.Presenter;
 
 public class FavouriteDetailsPresenter extends Presenter<FavouriteDetailsScreen> {
@@ -29,13 +30,24 @@ public class FavouriteDetailsPresenter extends Presenter<FavouriteDetailsScreen>
 
     public void showTeamData(){
         //TODO: get team data from DB
-        String[] teamData = null;
-        screen.showTeamData(teamData);
+
+        FavouriteTeamData favouriteTeamData = null;
+        if(FAVOURITE_TEAM_NAME == null){
+            favouriteTeamData = new FavouriteTeamData("", "", "", "", "", "");
+        }else {
+             favouriteTeamData = new FavouriteTeamData("Atlanta Hawks", "East", "Southeast", "Philips Arena", "Atlanta", "Georgia");
+        }
+
+        screen.showTeamData(favouriteTeamData);
     }
 
     public void deleteFavouriteTeam() {
         FAVOURITE_TEAM_NAME = null;
 
         screen.showFavouriteFragment();
+    }
+
+    public void refreshTeamData(){
+        screen.refreshTeamData();
     }
 }

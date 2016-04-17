@@ -3,6 +3,7 @@ package main.nba_standings.ui.favourite;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import main.nba_standings.R;
+import main.nba_standings.ui.favourite_details.FavouriteDetailsPresenter;
 
-public class FavouriteFragment extends Fragment implements FavouriteScreen{
+public class FavouriteFragment extends Fragment implements FavouriteScreen {
+    private View rootView = null;
+
     public FavouriteFragment() {
     }
 
@@ -35,7 +39,8 @@ public class FavouriteFragment extends Fragment implements FavouriteScreen{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_favourite, container, false);
+        rootView = inflater.inflate(R.layout.fragment_favourite, container, false);
+
         TextView textView = (TextView) rootView.findViewById(R.id.section_label);
         textView.setText(getString(R.string.favourite));
 
@@ -43,21 +48,17 @@ public class FavouriteFragment extends Fragment implements FavouriteScreen{
 
         FavouritePresenter.getInstance().showTeamNames();
 
-        String[] teams = new String[]{"Golden State", "San Antonio", "..."};
-
-        ArrayList<String> teamsList = new ArrayList<String>();
-        for(int i = 0; i < teams.length; i++){
-            teamsList.add(teams[i]);
-        }
-
-        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, teamsList);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final String item = (String) parent.getItemAtPosition(position);
+                final String teamName = (String) parent.getItemAtPosition(position);
 
+                FavouriteDetailsPresenter.FAVOURITE_TEAM_NAME = teamName;
+
+                FavouriteDetailsPresenter.getInstance().refreshTeamData();
+
+                ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.container);
+                viewPager.setCurrentItem(2);
             }
         });
 
@@ -65,7 +66,10 @@ public class FavouriteFragment extends Fragment implements FavouriteScreen{
     }
 
     @Override
-    public void showTeamNames(String[] teamNames) {
-        //TODO: show team names on listView
+    public void showTeamNames(ArrayList<String> teamNames) {
+        final ListView listView = (ListView) rootView.findViewById(R.id.favourites_text_view);
+
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, teamNames);
+        listView.setAdapter(adapter);
     }
 }

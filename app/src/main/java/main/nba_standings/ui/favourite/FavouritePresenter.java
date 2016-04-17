@@ -1,5 +1,7 @@
 package main.nba_standings.ui.favourite;
 
+import java.util.ArrayList;
+
 import main.nba_standings.ui.Presenter;
 
 public class FavouritePresenter extends Presenter<FavouriteScreen> {
@@ -27,7 +29,14 @@ public class FavouritePresenter extends Presenter<FavouriteScreen> {
 
     public void showTeamNames(){
         //TODO: get team names from DB
-        String[] teamNames = null;
+
+        String[] teams = new String[]{"Golden State", "San Antonio", "..."};
+
+        ArrayList<String> teamNames = new ArrayList<String>();
+        for(int i = 0; i < teams.length; i++){
+            teamNames.add(teams[i]);
+        }
+
         screen.showTeamNames(teamNames);
     }
 }

@@ -3,41 +3,86 @@ package main.nba_standings.ui.standings;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import main.nba_standings.R;
+import main.nba_standings.model.TeamStanding;
 
-    public class StandingsFragment extends Fragment implements StandingsScreen {
-        public StandingsFragment() {
-        }
+public class StandingsFragment extends Fragment implements StandingsScreen {
+    private View rootView = null;
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_standings, container, false);
+    public StandingsFragment() {
+    }
 
-            StandingsPresenter.getInstance().showStandings();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_standings, container, false);
 
-            return rootView;
-        }
+        StandingsPresenter.getInstance().showStandings();
 
-        @Override
-        public void onAttach(final Context context) {
-            super.onAttach(context);
+        return rootView;
+    }
 
-            StandingsPresenter.getInstance().attachScreen(this);
-        }
+    @Override
+    public void onAttach(final Context context) {
+        super.onAttach(context);
 
-        @Override
-        public void onDetach() {
-            StandingsPresenter.getInstance().detachScreen();
-            super.onDetach();
-        }
+        StandingsPresenter.getInstance().attachScreen(this);
+    }
 
-        @Override
-        public void showStandings(String[][] standings) {
-            //TODO: show standings on TableLayout
+    @Override
+    public void onDetach() {
+        StandingsPresenter.getInstance().detachScreen();
+        super.onDetach();
+    }
+
+    @Override
+    public void showStandings(ArrayList<TeamStanding> teamStandingList) {
+        TableLayout standingsTableLayout = (TableLayout) rootView.findViewById(R.id.standingsTableLayout);
+
+        for (TeamStanding teamStanding : teamStandingList) {
+            TableRow row = new TableRow(getActivity());
+            row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            row.setGravity(Gravity.CENTER);
+            row.setWeightSum(4);
+
+            TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
+
+            TextView rank = new TextView(getActivity());
+            rank.setText(String.valueOf(teamStanding.getRank()));
+            rank.setLayoutParams(params);
+            rank.setGravity(Gravity.CENTER);
+
+            TextView team = new TextView(getActivity());
+            team.setText(teamStanding.getTeamName());
+            team.setLayoutParams(params);
+            team.setGravity(Gravity.CENTER);
+
+            TextView win = new TextView(getActivity());
+            win.setText(String.valueOf(teamStanding.getWins()));
+            win.setLayoutParams(params);
+            win.setGravity(Gravity.CENTER);
+
+            TextView loss = new TextView(getActivity());
+            loss.setText(String.valueOf(teamStanding.getLosses()));
+            loss.setLayoutParams(params);
+            loss.setGravity(Gravity.CENTER);
+
+            row.addView(rank);
+            row.addView(team);
+            row.addView(win);
+            row.addView(loss);
+
+            standingsTableLayout.addView(row, new TableLayout.LayoutParams());
         }
     }
+}
