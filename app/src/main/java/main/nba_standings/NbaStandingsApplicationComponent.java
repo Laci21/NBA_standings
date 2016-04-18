@@ -4,9 +4,9 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import main.nba_standings.interactor.InteractorModule;
-import main.nba_standings.interactor.favourite.FavouriteInteractor;
-import main.nba_standings.interactor.favourite_details.FavouriteDetailsInteractor;
-import main.nba_standings.interactor.standings.StandingsInteractor;
+import main.nba_standings.interactor.dal.favourite.FavouriteInteractor;
+import main.nba_standings.interactor.dal.favourite_details.FavouriteDetailsInteractor;
+import main.nba_standings.interactor.dal.standings.StandingsInteractor;
 import main.nba_standings.ui.UIModule;
 import main.nba_standings.ui.favourite.FavouriteFragment;
 import main.nba_standings.ui.favourite.FavouritePresenter;

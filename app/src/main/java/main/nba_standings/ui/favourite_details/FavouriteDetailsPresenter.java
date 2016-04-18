@@ -3,7 +3,7 @@ package main.nba_standings.ui.favourite_details;
 import javax.inject.Inject;
 
 import main.nba_standings.NbaStandingsApplication;
-import main.nba_standings.interactor.favourite_details.FavouriteDetailsInteractor;
+import main.nba_standings.interactor.dal.favourite_details.FavouriteDetailsInteractor;
 import main.nba_standings.model.FavouriteTeamData;
 import main.nba_standings.ui.Presenter;
 

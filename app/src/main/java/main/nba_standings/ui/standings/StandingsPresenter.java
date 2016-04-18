@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import main.nba_standings.NbaStandingsApplication;
-import main.nba_standings.interactor.standings.StandingsInteractor;
+import main.nba_standings.interactor.dal.standings.StandingsInteractor;
 import main.nba_standings.model.TeamStanding;
 import main.nba_standings.ui.Presenter;
 

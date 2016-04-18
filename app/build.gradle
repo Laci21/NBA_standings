@@ -28,6 +28,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        mock {
+            applicationId "nba_standings.mock"
+            versionName "1.0-mock"
+        }
+        full {
+            applicationId "nba_standings.full"
+            versionName "1.0-full"
+        }
+    }
 }
 
 dependencies {

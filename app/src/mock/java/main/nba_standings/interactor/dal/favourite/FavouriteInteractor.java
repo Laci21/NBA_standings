@@ -1,28 +1,26 @@
-package main.nba_standings.interactor.favourite;
+package main.nba_standings.interactor.dal.favourite;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.xml.transform.Templates;
-
+import main.nba_standings.interactor.dal.TeamDataTableMockStore;
 import main.nba_standings.model.TeamDataTable;
-import main.nba_standings.model.TeamStanding;
 
 public class FavouriteInteractor {
+    private TeamDataTableMockStore teamDataTableMockStore;
     public FavouriteInteractor() {
+        teamDataTableMockStore = new TeamDataTableMockStore();
     }
 
     public ArrayList<String> getTeamNames() {
-        List<TeamDataTable> teamDataTableList = TeamDataTable.find(TeamDataTable.class, null, null, null, "team_name", null);
-
+        //TODO: order by teamName
         ArrayList<String> teamNames = new ArrayList<String>();
 
-        for(TeamDataTable teamDataTable : teamDataTableList){
+        for(TeamDataTable teamDataTable : teamDataTableMockStore.getTeamDataTableMap().values()){
             teamNames.add(teamDataTable.getTeamName());
         }
 
         //TODO: delete these
-        String[] teams = new String[]{"Golden State", "San Antonio", "..."};
+        String[] teams = new String[]{"Cleveland Cavaliers", "San Antonio", "..."};
 
         for(int i = 0; i < teams.length; i++){
             teamNames.add(teams[i]);

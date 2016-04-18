@@ -1,4 +1,4 @@
-package main.nba_standings.interactor.server;
+package main.nba_standings.interactor.dal.server;
 
 import java.util.List;
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import main.nba_standings.NbaStandingsApplication;
-import main.nba_standings.interactor.favourite.FavouriteInteractor;
+import main.nba_standings.interactor.dal.favourite.FavouriteInteractor;
 import main.nba_standings.ui.Presenter;
 
 public class FavouritePresenter extends Presenter<FavouriteScreen> {

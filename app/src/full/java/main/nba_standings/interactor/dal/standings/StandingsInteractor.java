@@ -1,4 +1,4 @@
-package main.nba_standings.interactor.standings;
+package main.nba_standings.interactor.dal.standings;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,22 +1,20 @@
-package main.nba_standings.interactor.favourite_details;
+package main.nba_standings.interactor.dal.favourite_details;
 
-import java.util.List;
-
+import main.nba_standings.interactor.dal.TeamDataTableMockStore;
 import main.nba_standings.model.FavouriteTeamData;
 import main.nba_standings.model.TeamDataTable;
 
 public class FavouriteDetailsInteractor {
+    private TeamDataTableMockStore teamDataTableMockStore;
+
     public FavouriteDetailsInteractor() {
+        teamDataTableMockStore = new TeamDataTableMockStore();
     }
 
     public FavouriteTeamData getTeamData(String favouriteTeamName) {
         FavouriteTeamData favouriteTeamData = null;
         if (favouriteTeamName != null) {
-            List<TeamDataTable> favouriteTeamDataTableList = TeamDataTable.find(TeamDataTable.class, "team_name = ?", favouriteTeamName);
-            TeamDataTable favouriteTeamDataTable = null;
-            if (favouriteTeamDataTableList != null && !favouriteTeamDataTableList.isEmpty()) {
-                favouriteTeamDataTable = favouriteTeamDataTableList.get(0);
-            }
+            TeamDataTable favouriteTeamDataTable = teamDataTableMockStore.getTeamDataTableMap().get(favouriteTeamName);
 
             if (favouriteTeamDataTable != null) {
                 favouriteTeamData = new FavouriteTeamData(favouriteTeamDataTable.getTeamName(),
@@ -29,7 +27,6 @@ public class FavouriteDetailsInteractor {
 
             //TODO: delete these
             favouriteTeamData = new FavouriteTeamData("Atlanta Hawks", "East", "Southeast", "Philips Arena", "Atlanta", "Georgia");
-
         } else {
             favouriteTeamData = new FavouriteTeamData("", "", "", "", "", "");
         }
