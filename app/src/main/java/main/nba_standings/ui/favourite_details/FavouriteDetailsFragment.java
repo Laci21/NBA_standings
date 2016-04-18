@@ -13,25 +13,32 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
+import main.nba_standings.NbaStandingsApplication;
 import main.nba_standings.R;
 import main.nba_standings.model.FavouriteTeamData;
 
 public class FavouriteDetailsFragment extends Fragment implements FavouriteDetailsScreen {
     private View rootView = null;
 
+    @Inject
+    FavouriteDetailsPresenter favouriteDetailsPresenter;
+
     public FavouriteDetailsFragment() {
+        NbaStandingsApplication.injector.inject(this);
     }
 
     @Override
     public void onAttach(final Context context) {
         super.onAttach(context);
 
-        FavouriteDetailsPresenter.getInstance().attachScreen(this);
+        favouriteDetailsPresenter.attachScreen(this);
     }
 
     @Override
     public void onDetach() {
-        FavouriteDetailsPresenter.getInstance().detachScreen();
+        favouriteDetailsPresenter.detachScreen();
         super.onDetach();
     }
 
@@ -46,7 +53,7 @@ public class FavouriteDetailsFragment extends Fragment implements FavouriteDetai
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FavouriteDetailsPresenter.getInstance().deleteFavouriteTeam();
+                favouriteDetailsPresenter.deleteFavouriteTeam();
             }
         });
 
@@ -96,7 +103,7 @@ public class FavouriteDetailsFragment extends Fragment implements FavouriteDetai
 
     @Override
     public void refreshTeamData(){
-        FavouriteDetailsPresenter.getInstance().showTeamData();
+        favouriteDetailsPresenter.showTeamData();
 
         Button deleteButton = (Button) rootView.findViewById(R.id.DeleteFavouriteTeamButton);
         if (FavouriteDetailsPresenter.FAVOURITE_TEAM_NAME == null) {
