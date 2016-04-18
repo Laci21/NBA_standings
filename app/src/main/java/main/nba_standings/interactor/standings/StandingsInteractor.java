@@ -15,7 +15,7 @@ public class StandingsInteractor {
 
         ArrayList<TeamStanding> teamStandingList = new ArrayList<TeamStanding>();
 
-        for(TeamDataTable teamDataTable : teamDataTableList){
+        for (TeamDataTable teamDataTable : teamDataTableList) {
             teamStandingList.add(new TeamStanding(teamDataTable.getRank(), teamDataTable.getTeamName(), teamDataTable.getWins(), teamDataTable.getLosses()));
         }
 
