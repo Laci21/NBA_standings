@@ -2,16 +2,12 @@ package main.nba_standings.ui;
 
 import android.content.Context;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import hu.bme.aut.android.spotifydemo.di.Network;
-import hu.bme.aut.android.spotifydemo.ui.artists.ArtistsPresenter;
-import hu.bme.aut.android.spotifydemo.ui.main.MainPresenter;
+import main.nba_standings.ui.favourite.FavouritePresenter;
+import main.nba_standings.ui.favourite_details.FavouriteDetailsPresenter;
 import main.nba_standings.ui.standings.StandingsPresenter;
 
 @Module
@@ -31,5 +27,17 @@ public class UIModule {
     @Singleton
     public StandingsPresenter provideStandingsPresenter() {
         return new StandingsPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public FavouritePresenter provideFavouritePresenter() {
+        return new FavouritePresenter();
+    }
+
+    @Provides
+    @Singleton
+    public FavouriteDetailsPresenter provideFavouriteDetailsPresenter() {
+        return new FavouriteDetailsPresenter();
     }
 }

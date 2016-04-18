@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import main.nba_standings.NbaStandingsDemoApplication;
+import javax.inject.Inject;
+
+import main.nba_standings.NbaStandingsApplication;
 import main.nba_standings.R;
 import main.nba_standings.model.TeamStanding;
 
@@ -24,7 +26,7 @@ public class StandingsFragment extends Fragment implements StandingsScreen {
     StandingsPresenter standingsPresenter;
 
     public StandingsFragment() {
-        NbaStandingsDemoApplication.injector.inject(this);
+        NbaStandingsApplication.injector.inject(this);
     }
 
     @Override

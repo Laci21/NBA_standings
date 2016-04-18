@@ -9,7 +9,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import javax.inject.Inject;
+
+import main.nba_standings.NbaStandingsApplication;
 import main.nba_standings.R;
+import main.nba_standings.interactor.dal.server.ServerInteractor;
+import main.nba_standings.model.TeamDataTable;
 import main.nba_standings.ui.favourite.FavouriteFragment;
 import main.nba_standings.ui.favourite_details.FavouriteDetailsFragment;
 import main.nba_standings.ui.standings.StandingsFragment;
@@ -31,6 +36,9 @@ public class StandingsActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    @Inject
+    ServerInteractor serverInteractor;
+
     public ViewPager getmViewPager() {
         return mViewPager;
     }
@@ -49,6 +57,29 @@ public class StandingsActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        NbaStandingsApplication.injector.inject(this);
+
+        saveTeams();
+    }
+
+    private void saveTeams() {
+        serverInteractor.flushDB();
+
+        serverInteractor.saveTeam(new TeamDataTable(1, "Golden State", 73, 9, "A", "A", "A", "A", "A", false));
+        serverInteractor.saveTeam(new TeamDataTable(2, "San Antonio", 69, 13, "B", "B", "B", "B", "B", false));
+        serverInteractor.saveTeam(new TeamDataTable(3, "Cleveland Cavaliers", 57, 25, "C", "C", "C", "C", "C", false));
+        serverInteractor.saveTeam(new TeamDataTable(4, "Toronto Raptors", 56, 26, "D", "D", "D", "D", "D", false));
+        serverInteractor.saveTeam(new TeamDataTable(5, "Oklahoma City", 55, 27, "E", "E", "E", "E", "E", false));
+        serverInteractor.saveTeam(new TeamDataTable(6, "L.A. Clippers", 53, 29, "F", "F", "F", "F", "F", false));
+
+        serverInteractor.findTeam("Golden State");
+        serverInteractor.findTeam("Golden Statee");
+
+        serverInteractor.updateTeam(new TeamDataTable(3, "Cleveland Cavaliers", 61, 19, "A", "A", "A", "A", "A", false));
+
+        serverInteractor.deleteTeam("San Antonio");
+        serverInteractor.saveTeam(new TeamDataTable(2, "San Antonio", 67, 15, "A", "A", "A", "A", "A", false));
     }
 
     /**

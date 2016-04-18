@@ -14,25 +14,35 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
+import main.nba_standings.NbaStandingsApplication;
 import main.nba_standings.R;
 import main.nba_standings.ui.favourite_details.FavouriteDetailsPresenter;
 
 public class FavouriteFragment extends Fragment implements FavouriteScreen {
     private View rootView = null;
 
+    @Inject
+    FavouritePresenter favouritePresenter;
+
+    @Inject
+    FavouriteDetailsPresenter favouriteDetailsPresenter;
+
     public FavouriteFragment() {
+        NbaStandingsApplication.injector.inject(this);
     }
 
     @Override
     public void onAttach(final Context context) {
         super.onAttach(context);
 
-        FavouritePresenter.getInstance().attachScreen(this);
+        favouritePresenter.attachScreen(this);
     }
 
     @Override
     public void onDetach() {
-        FavouritePresenter.getInstance().detachScreen();
+        favouritePresenter.detachScreen();
         super.onDetach();
     }
 
@@ -46,16 +56,16 @@ public class FavouriteFragment extends Fragment implements FavouriteScreen {
 
         final ListView listView = (ListView) rootView.findViewById(R.id.favourites_text_view);
 
-        FavouritePresenter.getInstance().showTeamNames();
+        favouritePresenter.showTeamNames();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final String teamName = (String) parent.getItemAtPosition(position);
 
-                FavouriteDetailsPresenter.FAVOURITE_TEAM_NAME = teamName;
+                favouriteDetailsPresenter.FAVOURITE_TEAM_NAME = teamName;
 
-                FavouriteDetailsPresenter.getInstance().refreshTeamData();
+                favouriteDetailsPresenter.refreshTeamData();
 
                 ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.container);
                 viewPager.setCurrentItem(2);
