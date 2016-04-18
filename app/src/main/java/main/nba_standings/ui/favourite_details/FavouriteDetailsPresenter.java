@@ -1,5 +1,9 @@
 package main.nba_standings.ui.favourite_details;
 
+import javax.inject.Inject;
+
+import main.nba_standings.NbaStandingsApplication;
+import main.nba_standings.interactor.favourite_details.FavouriteDetailsInteractor;
 import main.nba_standings.model.FavouriteTeamData;
 import main.nba_standings.ui.Presenter;
 
@@ -8,8 +12,8 @@ public class FavouriteDetailsPresenter extends Presenter<FavouriteDetailsScreen>
 
     public static String FAVOURITE_TEAM_NAME = null;
 
-    private FavouriteDetailsPresenter() {
-    }
+    @Inject
+    FavouriteDetailsInteractor favouriteDetailsInteractor;
 
     public static FavouriteDetailsPresenter getInstance() {
         if (instance == null) {
@@ -21,6 +25,7 @@ public class FavouriteDetailsPresenter extends Presenter<FavouriteDetailsScreen>
     @Override
     public void attachScreen(FavouriteDetailsScreen screen) {
         super.attachScreen(screen);
+        NbaStandingsApplication.injector.inject(this);
     }
 
     @Override
@@ -29,14 +34,7 @@ public class FavouriteDetailsPresenter extends Presenter<FavouriteDetailsScreen>
     }
 
     public void showTeamData(){
-        //TODO: get team data from DB
-
-        FavouriteTeamData favouriteTeamData = null;
-        if(FAVOURITE_TEAM_NAME == null){
-            favouriteTeamData = new FavouriteTeamData("", "", "", "", "", "");
-        }else {
-             favouriteTeamData = new FavouriteTeamData("Atlanta Hawks", "East", "Southeast", "Philips Arena", "Atlanta", "Georgia");
-        }
+        FavouriteTeamData favouriteTeamData = favouriteDetailsInteractor.getTeamData(FAVOURITE_TEAM_NAME);
 
         screen.showTeamData(favouriteTeamData);
     }
