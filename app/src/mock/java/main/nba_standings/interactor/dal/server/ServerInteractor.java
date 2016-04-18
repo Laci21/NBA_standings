@@ -4,9 +4,9 @@ import main.nba_standings.interactor.dal.TeamDataTableMockStore;
 import main.nba_standings.model.TeamDataTable;
 
 public class ServerInteractor {
-    private TeamDataTableMockStore teamDataTableMockStore;
+    private TeamDataTableMockStore teamDataTableMockStore = TeamDataTableMockStore.getInstance();
+
     public ServerInteractor() {
-        teamDataTableMockStore = new TeamDataTableMockStore();
     }
 
     public TeamDataTable findTeam(String teamName) {
@@ -22,6 +22,10 @@ public class ServerInteractor {
     }
 
     public void deleteTeam(String teamName) {
-       teamDataTableMockStore.getTeamDataTableMap().remove(teamName);
+        teamDataTableMockStore.getTeamDataTableMap().remove(teamName);
+    }
+
+    public void flushDB() {
+        teamDataTableMockStore.getTeamDataTableMap().clear();
     }
 }

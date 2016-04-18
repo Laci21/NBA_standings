@@ -9,21 +9,20 @@ import main.nba_standings.model.TeamDataTable;
  * Created by Lac on 2016.04.18..
  */
 public class TeamDataTableMockStore {
-    private static Map<String, TeamDataTable> teamDataTableMap;
+    private static TeamDataTableMockStore teamDataTableMockStore = null;
+    private Map<String, TeamDataTable> teamDataTableMap = new HashMap<String, TeamDataTable>();
 
-    public TeamDataTableMockStore() {
-        teamDataTableMap = new HashMap<String, TeamDataTable>();
+    private TeamDataTableMockStore() {
     }
 
-    public TeamDataTableMockStore(Map<String, TeamDataTable> teamDataTableMap) {
-        this.teamDataTableMap = teamDataTableMap;
+    public static TeamDataTableMockStore getInstance( ) {
+        if(teamDataTableMockStore == null){
+            teamDataTableMockStore = new TeamDataTableMockStore();
+        }
+        return teamDataTableMockStore;
     }
 
     public Map<String, TeamDataTable> getTeamDataTableMap() {
         return teamDataTableMap;
-    }
-
-    public void setTeamDataTableMap(Map<String, TeamDataTable> teamDataTableMap) {
-        this.teamDataTableMap = teamDataTableMap;
     }
 }

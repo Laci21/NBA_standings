@@ -26,10 +26,6 @@ public class FavouriteDetailsInteractor {
                         favouriteTeamDataTable.getCity(),
                         favouriteTeamDataTable.getState());
             }
-
-            //TODO: delete these
-            favouriteTeamData = new FavouriteTeamData("Atlanta Hawks", "East", "Southeast", "Philips Arena", "Atlanta", "Georgia");
-
         } else {
             favouriteTeamData = new FavouriteTeamData("", "", "", "", "", "");
         }

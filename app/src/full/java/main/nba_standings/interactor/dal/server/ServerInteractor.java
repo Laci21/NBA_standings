@@ -31,4 +31,9 @@ public class ServerInteractor {
             teamDataTable.delete();
         }
     }
+
+    public void flushDB() {
+        List<TeamDataTable> teamDataTableList = TeamDataTable.listAll(TeamDataTable.class);
+        TeamDataTable.deleteAll(TeamDataTable.class);
+    }
 }

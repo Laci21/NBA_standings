@@ -5,10 +5,9 @@ import main.nba_standings.model.FavouriteTeamData;
 import main.nba_standings.model.TeamDataTable;
 
 public class FavouriteDetailsInteractor {
-    private TeamDataTableMockStore teamDataTableMockStore;
+    private TeamDataTableMockStore teamDataTableMockStore = TeamDataTableMockStore.getInstance();
 
     public FavouriteDetailsInteractor() {
-        teamDataTableMockStore = new TeamDataTableMockStore();
     }
 
     public FavouriteTeamData getTeamData(String favouriteTeamName) {
@@ -24,9 +23,6 @@ public class FavouriteDetailsInteractor {
                         favouriteTeamDataTable.getCity(),
                         favouriteTeamDataTable.getState());
             }
-
-            //TODO: delete these
-            favouriteTeamData = new FavouriteTeamData("Atlanta Hawks", "East", "Southeast", "Philips Arena", "Atlanta", "Georgia");
         } else {
             favouriteTeamData = new FavouriteTeamData("", "", "", "", "", "");
         }

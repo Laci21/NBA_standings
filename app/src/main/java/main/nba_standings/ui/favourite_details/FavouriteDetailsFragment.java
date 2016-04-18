@@ -69,7 +69,10 @@ public class FavouriteDetailsFragment extends Fragment implements FavouriteDetai
 
         addOneRow("TEAM NAME", favouriteTeamData.getTeamName(), favouriteTeamDataTable, params, favouriteTeamData);
         addOneRow("CONFERENCE", favouriteTeamData.getConference(), favouriteTeamDataTable, params, favouriteTeamData);
-
+        addOneRow("DIVISION", favouriteTeamData.getDivision(), favouriteTeamDataTable, params, favouriteTeamData);
+        addOneRow("ARENA NAME", favouriteTeamData.getArenaName(), favouriteTeamDataTable, params, favouriteTeamData);
+        addOneRow("CITY", favouriteTeamData.getCity(), favouriteTeamDataTable, params, favouriteTeamData);
+        addOneRow("STATE", favouriteTeamData.getState(), favouriteTeamDataTable, params, favouriteTeamData);
     }
 
     private void addOneRow(String left, String right, TableLayout favouriteTeamDataTable, TableRow.LayoutParams params, FavouriteTeamData favouriteTeamData) {

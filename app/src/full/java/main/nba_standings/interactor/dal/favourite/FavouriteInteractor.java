@@ -18,13 +18,6 @@ public class FavouriteInteractor {
             teamNames.add(teamDataTable.getTeamName());
         }
 
-        //TODO: delete these
-        String[] teams = new String[]{"Golden State", "San Antonio", "..."};
-
-        for(int i = 0; i < teams.length; i++){
-            teamNames.add(teams[i]);
-        }
-
         return teamNames;
     }
 }

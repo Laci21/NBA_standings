@@ -19,13 +19,6 @@ public class StandingsInteractor {
             teamStandingList.add(new TeamStanding(teamDataTable.getRank(), teamDataTable.getTeamName(), teamDataTable.getWins(), teamDataTable.getLosses()));
         }
 
-        //TODO: delete these
-        TeamStanding goldenState = new TeamStanding(1, "Golden State", 73, 9);
-        TeamStanding sanAntonio = new TeamStanding(2, "San Antonio", 69, 13);
-
-        teamStandingList.add(goldenState);
-        teamStandingList.add(sanAntonio);
-
         return teamStandingList;
     }
 }
