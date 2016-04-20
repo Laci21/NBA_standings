@@ -1,5 +1,8 @@
 package main.nba_standings.interactor.dal.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import main.nba_standings.interactor.dal.TeamDataTableMockStore;
 import main.nba_standings.model.TeamDataTable;
 
@@ -7,6 +10,10 @@ public class ServerInteractor {
     private TeamDataTableMockStore teamDataTableMockStore = TeamDataTableMockStore.getInstance();
 
     public ServerInteractor() {
+    }
+
+    public List<TeamDataTable> findAllTeams() {
+        return new ArrayList<TeamDataTable>(teamDataTableMockStore.getTeamDataTableMap().values());
     }
 
     public TeamDataTable findTeam(String teamName) {
