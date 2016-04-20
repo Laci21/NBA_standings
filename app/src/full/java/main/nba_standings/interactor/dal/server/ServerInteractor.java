@@ -1,11 +1,23 @@
 package main.nba_standings.interactor.dal.server;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import main.nba_standings.model.TeamDataTable;
 
 public class ServerInteractor {
     public ServerInteractor() {
+    }
+
+    public List<TeamDataTable> findAllTeams() {
+        List<TeamDataTable> teamDataTableList = new ArrayList<TeamDataTable>();
+        Iterator<TeamDataTable> iterator = TeamDataTable.findAll(TeamDataTable.class);
+        while (iterator.hasNext()) {
+            teamDataTableList.add(iterator.next());
+        }
+
+        return teamDataTableList;
     }
 
     public TeamDataTable findTeam(String teamName) {

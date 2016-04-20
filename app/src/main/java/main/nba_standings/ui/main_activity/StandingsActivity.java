@@ -73,6 +73,8 @@ public class StandingsActivity extends AppCompatActivity {
         serverInteractor.saveTeam(new TeamDataTable(5, "Oklahoma City", 55, 27, "E", "E", "E", "E", "E", false));
         serverInteractor.saveTeam(new TeamDataTable(6, "L.A. Clippers", 53, 29, "F", "F", "F", "F", "F", false));
 
+        serverInteractor.findAllTeams();
+
         serverInteractor.findTeam("Golden State");
         serverInteractor.findTeam("Golden Statee");
 
