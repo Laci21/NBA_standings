@@ -10,9 +10,6 @@ import okhttp3.Headers;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by Máté on 01/05/2016.
- */
 public class NetworkMock {
 
     @Inject
@@ -29,20 +26,22 @@ public class NetworkMock {
             responseString = GsonHelper.getGson().toJson(serverInteractor.findAllTeams());
             responseCode = 200;
         } else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "teams") && request.method().equals("PUT")) {
-            serverInteractor.updateTeam(new TeamDataTable());
-
-            responseString = "";
+            responseString = GsonHelper.getGson().toJson(request.body());
+            serverInteractor.updateTeam(TeamDataTable.createTeamDataTableFromJsonString(responseString));
             responseCode = 200;
         } else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "teams") && request.method().equals("POST")) {
-            serverInteractor.saveTeam(new TeamDataTable());
-
-            responseString = "";
+            responseString = GsonHelper.getGson().toJson(request.body());
+            serverInteractor.saveTeam(TeamDataTable.createTeamDataTableFromJsonString(responseString));
             responseCode = 200;
         } else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "teams/") && request.method().equals("GET")) {
-            responseString = GsonHelper.getGson().toJson(serverInteractor.findTeam(""));
+            int startOfData = uri.getPath().lastIndexOf('/');
+            String teamName = uri.getPath().substring(startOfData + 1);
+            responseString = GsonHelper.getGson().toJson(serverInteractor.findTeam(teamName));
             responseCode = 200;
         }  else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "teams/") && request.method().equals("DELETE")) {
-            serverInteractor.deleteTeam("");
+            int startOfData = uri.getPath().lastIndexOf('/');
+            String teamName = uri.getPath().substring(startOfData + 1);
+            serverInteractor.deleteTeam(teamName);
 
             responseString = "";
             responseCode = 200;

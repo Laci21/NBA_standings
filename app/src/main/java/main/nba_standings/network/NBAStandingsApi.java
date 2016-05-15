@@ -2,7 +2,7 @@ package main.nba_standings.network;
 
 import java.util.List;
 
-import main.nba_standings.model.Team;
+import main.nba_standings.model.TeamDataTable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -16,37 +16,37 @@ public interface NBAStandingsApi {
   /**
    * 
    * Return all teams from DB.
-   * @return Call<List<Team>>
+   * @return Call<List<TeamDataTable>>
    */
   
   @GET("teams")
-  Call<List<Team>> teamsGet();
+  Call<List<TeamDataTable>> teamsGet();
     
 
   
   /**
    * 
    * Updates a team in DB.
-   * @param team Team to update in DB.
-   * @return Call<Team>
+   * @param teamDataTable TeamDataTable to update in DB.
+   * @return Call<TeamDataTable>
    */
   
   @PUT("teams")
-  Call<Team> teamsPut(
-          @Body Team team
+  Call<TeamDataTable> teamsPut(
+          @Body TeamDataTable teamDataTable
   );
 
   
   /**
    * 
    * Creates a new team in DB.
-   * @param team Team to add to DB.
-   * @return Call<Team>
+   * @param teamDataTable TeamDataTable to add to DB.
+   * @return Call<TeamDataTable>
    */
   
   @POST("teams")
-  Call<Team> teamsPost(
-          @Body Team team
+  Call<TeamDataTable> teamsPost(
+          @Body TeamDataTable teamDataTable
   );
 
   
@@ -54,11 +54,11 @@ public interface NBAStandingsApi {
    * 
    * Returns the team with the given name from DB.
    * @param teamName name of team to fetch
-   * @return Call<Team>
+   * @return Call<TeamDataTable>
    */
   
   @GET("teams/{teamName}")
-  Call<Team> teamsTeamNameGet(
+  Call<TeamDataTable> teamsTeamNameGet(
           @Path("teamName") String teamName
   );
 

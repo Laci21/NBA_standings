@@ -13,9 +13,6 @@ import okio.Buffer;
 import okio.BufferedSource;
 import okio.Okio;
 
-/**
- * Created by Máté on 01/05/2016.
- */
 public class MockHelper {
     public static Response makeResponse(Request request, Headers headers, int code, final String content) {
 

@@ -12,10 +12,6 @@ import okhttp3.Response;
 
 import static main.nba_standings.network.MockHelper.makeResponse;
 
-/**
- * Created by Máté on 01/05/2016.
- */
-
 public class MockInterceptor implements Interceptor {
 
     @Override

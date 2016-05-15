@@ -6,9 +6,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import main.nba_standings.network.NBAStandingsApi;
-import main.nba_standings.network.NetworkConfig;
-import main.nba_standings.network.UnsafeClientFactory;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,9 +13,6 @@ import okhttp3.Response;
 import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
 
-/**
- * Created by Máté on 01/05/2016.
- */
 @Module
 public class NetworkModule {
 
