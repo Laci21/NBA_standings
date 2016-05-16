@@ -2,18 +2,22 @@ package main.nba_standings.network;
 
 import android.net.Uri;
 
-import javax.inject.Inject;
+import java.io.IOException;
 
 import main.nba_standings.interactor.dal.server.ServerInteractor;
 import main.nba_standings.model.TeamDataTable;
 import okhttp3.Headers;
 import okhttp3.Request;
 import okhttp3.Response;
+import okio.Buffer;
 
 public class NetworkMock {
 
-    @Inject
-    ServerInteractor serverInteractor;
+    private ServerInteractor serverInteractor;
+
+    public NetworkMock(){
+        serverInteractor = new ServerInteractor();
+    }
 
     public Response process(Request request) {
         Uri uri = Uri.parse(request.url().toString());
@@ -26,11 +30,25 @@ public class NetworkMock {
             responseString = GsonHelper.getGson().toJson(serverInteractor.findAllTeams());
             responseCode = 200;
         } else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "teams") && request.method().equals("PUT")) {
-            responseString = GsonHelper.getGson().toJson(request.body());
+            final Buffer buffer = new Buffer();
+            try {
+                request.body().writeTo(buffer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            responseString = GsonHelper.getGson().toJson(buffer.readUtf8());
+            responseString = responseString.substring(1, responseString.length() - 1).replace("\\", "");
             serverInteractor.updateTeam(TeamDataTable.createTeamDataTableFromJsonString(responseString));
             responseCode = 200;
         } else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "teams") && request.method().equals("POST")) {
-            responseString = GsonHelper.getGson().toJson(request.body());
+            final Buffer buffer = new Buffer();
+            try {
+                request.body().writeTo(buffer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            responseString = GsonHelper.getGson().toJson(buffer.readUtf8());
+            responseString = responseString.substring(1, responseString.length() - 1).replace("\\", "");
             serverInteractor.saveTeam(TeamDataTable.createTeamDataTableFromJsonString(responseString));
             responseCode = 200;
         } else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "teams/") && request.method().equals("GET")) {

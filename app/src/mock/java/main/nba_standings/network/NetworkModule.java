@@ -60,5 +60,4 @@ public class NetworkModule {
     public NBAStandingsApi provideNBAStandingsApi(Retrofit retrofit) {
         return retrofit.create(NBAStandingsApi.class);
     }
-
 }
