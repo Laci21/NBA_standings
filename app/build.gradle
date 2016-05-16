@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "main.nba_standings"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,10 @@ android {
             versionName "1.0-full"
         }
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -52,4 +56,17 @@ dependencies {
     provided 'javax.annotation:jsr250-api:1.0'
 
     compile 'com.github.satyan:sugar:1.4'
+
+    //Retrofit and OkHttp
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
+    compile 'com.squareup.okhttp3:okhttp:3.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile 'com.google.code.gson:gson:2.4'
+
+    //Robolectric
+    testCompile('org.robolectric:shadows-support-v4:3.0-rc3') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
 }
