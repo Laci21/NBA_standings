@@ -11,6 +11,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -18,6 +20,7 @@ import javax.inject.Inject;
 import main.nba_standings.NbaStandingsApplication;
 import main.nba_standings.R;
 import main.nba_standings.model.TeamStanding;
+import main.nba_standings.ui.main_activity.StandingsActivity;
 
 public class StandingsFragment extends Fragment implements StandingsScreen {
     private View rootView = null;
@@ -44,6 +47,14 @@ public class StandingsFragment extends Fragment implements StandingsScreen {
         super.onAttach(context);
 
         standingsPresenter.attachScreen(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        StandingsActivity.mTracker.setScreenName("StandingsFragment");
+        StandingsActivity.mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

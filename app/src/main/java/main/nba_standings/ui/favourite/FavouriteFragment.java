@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -19,6 +21,7 @@ import javax.inject.Inject;
 import main.nba_standings.NbaStandingsApplication;
 import main.nba_standings.R;
 import main.nba_standings.ui.favourite_details.FavouriteDetailsPresenter;
+import main.nba_standings.ui.main_activity.StandingsActivity;
 
 public class FavouriteFragment extends Fragment implements FavouriteScreen {
     private View rootView = null;
@@ -38,6 +41,14 @@ public class FavouriteFragment extends Fragment implements FavouriteScreen {
         super.onAttach(context);
 
         favouritePresenter.attachScreen(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        StandingsActivity.mTracker.setScreenName("FavouriteFragment");
+        StandingsActivity.mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

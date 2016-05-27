@@ -13,11 +13,14 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import javax.inject.Inject;
 
 import main.nba_standings.NbaStandingsApplication;
 import main.nba_standings.R;
 import main.nba_standings.model.FavouriteTeamData;
+import main.nba_standings.ui.main_activity.StandingsActivity;
 
 public class FavouriteDetailsFragment extends Fragment implements FavouriteDetailsScreen {
     private View rootView = null;
@@ -34,6 +37,14 @@ public class FavouriteDetailsFragment extends Fragment implements FavouriteDetai
         super.onAttach(context);
 
         favouriteDetailsPresenter.attachScreen(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        StandingsActivity.mTracker.setScreenName("FavouriteDetailsFragment");
+        StandingsActivity.mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

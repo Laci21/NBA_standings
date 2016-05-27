@@ -3,7 +3,7 @@ package main.nba_standings;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ import static junit.framework.Assert.assertEquals;
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
  */
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 19, packageName = "main.nbastandings")
 public class NetworkUnitTest {
 
@@ -81,10 +81,6 @@ public class NetworkUnitTest {
 
             Response response = mockInterceptor.process(request);
             assertEquals(response.body().string(), GSJsonArray);
-
-            serverInteractor.saveTeam(SATeamDataTable);
-            response = mockInterceptor.process(request);
-            assertEquals(GSAndSAJson, response.body().string());
         }
     }
 

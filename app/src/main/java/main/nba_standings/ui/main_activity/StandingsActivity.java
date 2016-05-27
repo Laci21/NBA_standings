@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.google.android.gms.analytics.Tracker;
+
 import javax.inject.Inject;
 
 import main.nba_standings.NbaStandingsApplication;
@@ -39,6 +41,8 @@ public class StandingsActivity extends AppCompatActivity {
     @Inject
     ServerInteractor serverInteractor;
 
+    public static Tracker mTracker;
+
     public ViewPager getmViewPager() {
         return mViewPager;
     }
@@ -47,6 +51,9 @@ public class StandingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_standings);
+
+        NbaStandingsApplication application = (NbaStandingsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "311453746444",
+    "project_id": "nbastandings-cfbe4"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311453746444:android:12e5a77beb527fd1",
+        "android_client_info": {
+          "package_name": "nba_standings.mock"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdvnmtyrSNFVeyYcFMJVBZOPfSM1ZdqSg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-78417256-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
